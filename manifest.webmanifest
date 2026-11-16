@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "ZUPERMAN｜英雄測驗",
+  "short_name": "ZUPERMAN",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "background_color": "#070a11",
+  "theme_color": "#070a11",
+  "icons": [
+    {
+      "src": "assets/ui/zuperman-app-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/ui/zuperman-app-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

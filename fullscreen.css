@@ -1,0 +1,155 @@
+#fullscreen-toggle {
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #354b75;
+  color: #e5edff;
+  touch-action: manipulation;
+}
+
+#fullscreen-toggle[aria-pressed='true'] {
+  border-color: #5e80d2;
+  background: #203b75;
+}
+
+#main {
+  min-height: calc(100svh - var(--toolbar-height, 44px));
+  min-height: calc(100dvh - var(--toolbar-height, 44px));
+}
+
+/* 遊戲進行中（非 title 畫面）收起頂部工具列，畫面滿版 */
+body:not([data-phase='title']) .toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  min-height: 0;
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border-bottom: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+  z-index: 25;
+}
+
+body:not([data-phase='title']) #main {
+  --toolbar-height: 0px;
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+/* 輕觸畫面頂緣喚回工具列（切出全螢幕/調音量用） */
+body:not([data-phase='title']).show-toolbar .toolbar {
+  height: var(--toolbar-safe-height, 44px);
+  min-height: var(--toolbar-safe-height, 44px);
+  max-height: var(--toolbar-safe-height, 44px);
+  padding-top: calc(4px + env(safe-area-inset-top, 0px));
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html:is([data-display='fullscreen'], [data-display='standalone']) body {
+  min-height: 100dvh;
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+}
+
+html:is([data-display='fullscreen'], [data-display='standalone']) .toolbar {
+  --toolbar-safe-height: calc(44px + env(safe-area-inset-top, 0px));
+  height: var(--toolbar-safe-height);
+  min-height: var(--toolbar-safe-height);
+  max-height: var(--toolbar-safe-height);
+  padding-top: calc(4px + env(safe-area-inset-top, 0px));
+}
+
+#fullscreen-help {
+  width: min(390px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 22px;
+  border: 1px solid #5673a8;
+  border-radius: 8px;
+  background: #0b1222;
+  box-shadow: 0 16px 55px #000a;
+  color: #e5edff;
+}
+
+#fullscreen-help::backdrop {
+  background: #02050cbb;
+}
+
+#fullscreen-help h2 {
+  margin: 0;
+  color: #f4f7ff;
+  font-size: 19px;
+  font-weight: normal;
+}
+
+#fullscreen-help p {
+  margin: 12px 0 18px;
+  color: #cbd9f5;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#fullscreen-help button {
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid #5e80d2;
+  border-radius: 4px;
+  background: #203b75;
+  color: #f4f7ff;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  html[data-iphone-browser][data-ios-scroll-test] body {
+    min-height: calc(100lvh + 320px);
+  }
+
+  html[data-iphone-browser][data-ios-scroll-test] #game-viewport {
+    position: sticky;
+    top: 0;
+  }
+
+  html[data-iphone-browser] .toolbar {
+    height: calc(44px + env(safe-area-inset-top, 0px));
+    min-height: 0;
+    max-height: none;
+    padding-top: calc(4px + env(safe-area-inset-top, 0px));
+    padding-left: max(9px, env(safe-area-inset-left, 0px));
+    padding-right: max(9px, env(safe-area-inset-right, 0px));
+  }
+
+  html[data-iphone-browser] #main {
+    --compact-iphone: 1;
+    --iphone-play-height: max(0px, calc(var(--iphone-viewport-height, 100dvh) - var(--toolbar-height, 44px) - env(safe-area-inset-bottom, 0px)));
+    min-height: calc(var(--iphone-play-height) + env(safe-area-inset-bottom, 0px));
+    padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  }
+
+  html[data-iphone-browser] :is(#title-page, #ending-stage) {
+    width: min(100%, calc(var(--iphone-play-height) * .461267606));
+  }
+
+  html[data-iphone-browser] #quiz-page .actions {
+    position: absolute;
+    top: calc(-1 * var(--toolbar-height, 44px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    height: var(--toolbar-height, 44px);
+    min-height: 0;
+    padding: env(safe-area-inset-top, 0px) 0 0;
+    background: transparent;
+    z-index: 21;
+  }
+
+  html[data-iphone-browser] #back {
+    min-height: 36px;
+    touch-action: manipulation;
+  }
+
+  html[data-iphone-browser] body:has(.more-controls[open]) #quiz-page .actions {
+    z-index: 19;
+  }
+}

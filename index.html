@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#070a11"><title>ZUPERMAN｜英雄測驗</title><link rel="stylesheet" href="app.css?v=46"><link rel="stylesheet" href="keypad.css?v=63"><link rel="stylesheet" href="intro.css?v=64"><link rel="stylesheet" href="endings.css?v=46"><link rel="stylesheet" href="result-v31.css?v=64"><link rel="stylesheet" href="card-dialog.css?v=58"><link rel="stylesheet" href="reveal-v31.css?v=58"><link rel="stylesheet" href="reveal-v43.css?v=45"><link rel="manifest" href="manifest.webmanifest?v=46">
+<link rel="apple-touch-icon" href="assets/ui/zuperman-app-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="fullscreen.css?v=55">
+<script src="fullscreen.js?v=58" defer></script>
+</head>
+<body data-skin="a" data-phase="title">
+<div id="game-viewport">
+<header class="toolbar" aria-label="播放與顯示設定">
+  <button id="fullscreen-toggle" type="button" aria-pressed="false" hidden>全螢幕</button>
+  <details class="more-controls">
+    <summary>更多</summary>
+    <nav>
+      <span id="music-slot"></span>
+      <button id="screen-zoom" type="button" aria-pressed="false">放大螢幕</button>
+      <a href="questions.html">全部題目</a>
+    </nav>
+  </details>
+</header>
+<main id="main">
+<section id="title-page" aria-label="ZUPERMAN 電話開始畫面">
+  <img src="assets/intro/title-phone-v2.png" width="1179" height="2556" alt="ZUPERMAN 實體電話開始畫面">
+  <div class="title-controls">
+    <p id="start-prompt" class="start-prompt">PRESS <span class="start-prompt-hash">#</span></p>
+    <span id="title-menu-arrow" class="title-menu-arrow" aria-hidden="true"></span>
+    <button id="start-hash" type="button" aria-label="按電話井字鍵開始測驗">#</button>
+  </div>
+</section>
+<section id="quiz-page" hidden aria-label="ZUPERMAN 英雄測驗"><div id="phone-holder"><div id="phone-artboard"><img id="phone-body" src="assets/ui/phone-a.png" alt="實體公共電話機身" draggable="false"><div id="screen"><div id="screen-inner"><div id="question-panel"><span id="question-title"></span><h1 id="question" tabindex="-1"></h1></div><span id="progress-label" aria-live="polite"></span><div id="answers" role="group" aria-label="四個答案"></div><div id="screen-footer"><span id="progress-lamps" aria-hidden="true"></span><span id="screen-hint">按 1–4 選擇</span></div><div class="screen-scan" aria-hidden="true"></div></div></div><nav id="keypad" aria-label="電話實體按鍵"></nav></div></div><div class="actions"><button id="back" type="button">上一題</button></div></section>
+<section id="analysis-page" hidden aria-label="分析中"><img class="analysis-logo" src="assets/ui/zuperman.png" alt="ZUPERMAN"><p class="analysis-kicker">HERO TEST</p><h1>英雄資料分析中</h1><div class="analysis-bars" aria-hidden="true"></div><p id="analysis-percent">0%</p></section>
+<section id="ending-stage" hidden aria-label="ZUPERMAN 英雄證電話">
+  <div class="ending-glass">
+    <section id="result-page" class="ending-view v31-result" data-design-version="v31" hidden aria-labelledby="hero-name">
+      <div class="v31-stock">
+        <div id="v31-result-scroll" class="v31-scroll" tabindex="0" role="region" aria-label="完整英雄測驗結果">
+          <div class="v31-face">
+            <header class="v31-header">
+              <h1 class="v31-chrome v31-name" id="hero-name" tabindex="-1"></h1>
+              <span class="v31-color" id="hero-color-name"></span>
+              <img class="v31-stars" src="card-preview-1110/art-v8/gold-stars.png" alt="" width="232" height="84">
+            </header>
+            <figure class="v31-visual" aria-label="HUR 鉻銀徽章與 ZUPERMAN 字標">
+              <img class="v31-emblem" id="v31-emblem" src="card-preview-1110/art-v8/chrome-hur.png" alt="" width="1210" height="539">
+              <img class="v31-mark" id="v31-mark" src="card-preview-1110/v31-zuperman-chrome.png" alt="ZUPERMAN" width="2091" height="373">
+            </figure>
+            <div class="v31-gear">
+              <div><span>技能解放</span><strong id="hero-gear"></strong></div>
+              <div><span>封印本體</span><strong id="hero-item"></strong></div>
+            </div>
+            <blockquote id="hero-quote"></blockquote>
+            <div class="v31-data">
+              <div class="v31-stats">
+                <button id="v31-abilities" type="button" aria-controls="v31-full-abilities">能力值</button>
+                <canvas id="result-radar" width="180" height="144" aria-hidden="true"></canvas>
+              </div>
+              <section class="v31-team" aria-labelledby="hero-team-heading">
+                <h2 id="hero-team-heading">最佳隊友</h2>
+                <ul id="hero-team"></ul>
+              </section>
+            </div>
+            <button id="v31-scroll-cue" class="v31-scroll-cue" type="button" aria-controls="v31-complete-result">下滑看完整結果 <span aria-hidden="true">↓</span></button>
+          </div>
+          <div id="v31-complete-result" class="v31-complete">
+            <section aria-labelledby="v31-profile-heading">
+              <h2 id="v31-profile-heading" tabindex="-1">英雄側寫</h2>
+              <p id="v31-profile-copy"></p>
+              <ul id="v31-traits" aria-label="人格標籤"></ul>
+            </section>
+            <section id="v31-full-abilities" aria-labelledby="v31-abilities-heading">
+              <h2 id="v31-abilities-heading" tabindex="-1">能力值</h2>
+              <dl id="v31-full-stats" class="v31-detail-values"></dl>
+            </section>
+            <section aria-labelledby="v31-full-team-heading">
+              <h2 id="v31-full-team-heading">最佳隊友</h2>
+              <ul id="v31-full-team" class="v31-full-team"></ul>
+            </section>
+          </div>
+        </div>
+        <a id="card-link" class="v31-chrome v31-cta" href="#upload-page">製作我的英雄證</a>
+      </div>
+    </section>
+    <section id="upload-page" class="ending-view" hidden aria-label="選擇英雄證照片">
+      <div class="ending-window ending-upload-window">
+        <div class="ending-window-title">
+          <span>英雄證照片</span>
+          <img src="assets/ui/zuperman.png" width="432" height="146" alt="ZUPERMAN">
+        </div>
+        <div class="ending-license">
+          <input id="photo-input" type="file" accept="image/*" aria-label="選擇英雄證照片" aria-describedby="photo-status">
+          <label id="choose-photo" for="photo-input">
+            <span class="ending-photo-frame">
+              <img id="photo-preview" alt="英雄證照片預覽" hidden>
+              <span id="photo-placeholder" aria-hidden="true"></span>
+            </span>
+            <span class="ending-photo-action">選擇照片</span>
+          </label>
+          <div class="ending-license-data">
+            <span class="ending-chip" aria-hidden="true"></span>
+            <h1 id="upload-hero-name" tabindex="-1"></h1>
+            <span class="ending-license-lines" aria-hidden="true"></span>
+            <p id="photo-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+      <div class="ending-footer">
+        <label id="choose-photo-footer" class="ending-primary" for="photo-input">選擇我的照片</label>
+        <button id="make-card" hidden class="ending-primary" type="button" disabled>製作英雄證</button>
+        <button id="back-result" class="ending-secondary" type="button">返回結果</button>
+      </div>
+    </section>
+  </div>
+  <button id="restart" type="button">再測一次</button>
+  <button id="ending-zero" type="button" aria-label="按電話 0 鍵繼續">0</button>
+</section>
+</main>
+</div>
+<dialog id="hero-card-dialog" aria-label="你的英雄證">
+  <canvas id="card-canvas" width="1062" height="1482" tabindex="0" aria-label="英雄證正面，拖曳照片或用方向鍵調整位置"></canvas>
+  <img id="card-back-face" alt="英雄證背面" hidden>
+  <p id="card-warning" role="status" hidden></p>
+  <div class="hero-card-actions">
+    <button id="flip-card" type="button" hidden>查看背面</button>
+    <button id="save-hero-card" type="button" disabled>下載限動影片</button>
+    <button id="share-hero-card" type="button" disabled>分享 IG 限動</button>
+    <button id="close-hero-card" type="button">返回電話</button>
+  </div>
+  <p id="story-status" role="status"></p>
+</dialog>
+<script src="engine.js?v=6"></script><script src="hero-card.js?v=58"></script><script src="card-reveal.js?v=58"></script><script src="result-v31.js?v=58"></script><script src="ending-flow.js?v=58"></script><script src="background-music.js?v=57" data-controls="#music-slot"></script><script src="intro-player.js?v=64"></script><script src="app.js?v=64"></script><script src="key-audio.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b59a8e6ce21836',t:'MTc5NDgyMjc1NQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b59a8e6ce21836',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

@@ -1,0 +1,182 @@
+#title-page {
+  position: relative;
+  width: min(100vw, calc((100svh - var(--toolbar-height, 44px)) * 0.461267606));
+  width: min(100vw, calc((100dvh - var(--toolbar-height, 44px)) * 0.461267606));
+  height: auto;
+  aspect-ratio: 1179 / 2556;
+  container-type: inline-size;
+}
+
+#title-page > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.start-prompt {
+  position: absolute;
+  left: 29.5%;
+  top: 45.55%;
+  width: 41%;
+  height: 3.2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.25cqw;
+  margin: 0;
+  color: #bad0f9;
+  background: #02050c;
+  box-shadow: 0 0 .7cqw .35cqw #02050c;
+  font: 11px Pixel, monospace;
+  font-size: clamp(9px, 3.2cqw, 16px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.start-prompt-hash {
+  color: #e5f2ff;
+  font-family: ui-monospace, monospace;
+  font-size: 2.65em;
+  font-weight: 800;
+  line-height: .8;
+  text-shadow: 0 0 .9cqw #84aefaaa;
+}
+
+.title-controls::before {
+  content: '';
+  position: absolute;
+  left: 22.307%;
+  top: 38.732%;
+  width: 4.325cqw;
+  height: 4.919cqw;
+  /* Cover the original static title cursor with neighboring glass from the same image. */
+  background: url('assets/intro/title-phone-v2.png') 18.706% 39.632% / 100cqw auto no-repeat;
+  pointer-events: none;
+}
+
+.title-menu-arrow {
+  position: absolute;
+  z-index: 1;
+  left: 55.8%;
+  top: 47.15%;
+  width: 3.31cqw;
+  height: 3.9cqw;
+  transform: translate(-50%, -50%);
+  background: url('assets/intro/title-phone-v2.png') 23.597% 39.681% / 100cqw auto no-repeat;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: left .22s steps(5, end), top .22s steps(5, end);
+}
+
+#title-page[data-start-step='start'] #title-menu-arrow {
+  left: 32.1%;
+  top: 34.15%;
+}
+
+#start-hash {
+  position: absolute;
+  left: calc(65.395% - max(22px, 7.635cqw));
+  top: calc(85.98% - max(22px, 5.98cqw));
+  width: max(44px, 15.27cqw);
+  height: max(44px, 11.96cqw);
+  padding: 0;
+  border: 0;
+  border-radius: 2cqw;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#start-hash::before {
+  content: '';
+  position: absolute;
+  inset: calc(50% + .03cqw) auto auto 50%;
+  width: 8.1425cqw;
+  aspect-ratio: 96 / 86;
+  transform: translate(-50%, -50%);
+  /* The alpha mask follows the engraved strokes of the original phone artwork. */
+  background: #ff3434;
+  -webkit-mask: url('assets/intro/title-hash-mask.png') center / 100% 100% no-repeat;
+  mask: url('assets/intro/title-hash-mask.png') center / 100% 100% no-repeat;
+  opacity: .86;
+  animation: title-hash-light 1.45s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+#start-hash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 41% 42% at 50% 50%, #ff362e38, #ff301b18 57%, transparent);
+  opacity: .86;
+  animation: title-hash-light 1.45s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes title-hash-light {
+  from { opacity: .48; }
+  to { opacity: 1; }
+}
+
+#start-hash:active::before {
+  animation: none;
+  opacity: .72;
+}
+
+#start-hash:focus-visible {
+  outline: 2px solid #a6cbff;
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #start-hash::before,
+  #start-hash::after { animation: none; }
+}
+
+.zi-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  background: #070a11;
+}
+
+.zi-intro-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  pointer-events: none;
+}
+
+#title-page:has(.zi-intro) .title-controls {
+  visibility: hidden;
+}
+
+.zi-intro button {
+  position: absolute;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 12px;
+  border: 1px solid #657da2;
+  color: #e4edff;
+  background: #080d1cea;
+  font: 14px/1.15 Cubic, monospace;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.zi-intro button[hidden] { display: none; }
+
+.zi-intro button:focus-visible {
+  outline: 2px solid #a6cbff;
+  outline-offset: 2px;
+}
+
+.zi-intro-play {
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+}

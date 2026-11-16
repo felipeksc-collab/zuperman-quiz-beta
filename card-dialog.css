@@ -1,0 +1,269 @@
+#hero-card-dialog {
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  padding: 12px;
+  border: 1px solid #9eb6fd;
+  background: #080c1a;
+  color: #e9f0ff;
+  font-family: Cubic, monospace;
+  overflow: auto;
+}
+
+#hero-card-dialog::backdrop {
+  background: #03040ce6;
+}
+
+#card-canvas,
+#card-back-face {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 480px);
+  max-height: calc(100dvh - 128px);
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+#card-canvas { touch-action: none; cursor: grab; }
+#card-canvas:active { cursor: grabbing; }
+
+.hero-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.hero-card-actions button {
+  border: 1px solid #657cc1;
+  padding: 8px 10px;
+  background: #111d43;
+  color: #f2f6ff;
+  font: 14px Cubic, monospace;
+}
+
+.hero-card-actions button:disabled { opacity: .55; }
+
+#story-status {
+  flex: none;
+  margin: 0 8px 5px;
+  color: #d4e4ff;
+  font: 13px/1.35 Cubic, monospace;
+}
+
+#story-status:empty { display: none; }
+
+#card-warning {
+  max-width: 430px;
+  margin: 8px auto 0;
+  font-size: 13px;
+}
+
+#hero-card-dialog.hero-card-reveal {
+  position: fixed;
+  width: min(calc(100vw - 24px), 540px);
+  margin: auto;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  isolation: isolate;
+  text-align: center;
+}
+
+#hero-card-dialog.hero-card-reveal::backdrop {
+  background: radial-gradient(ellipse at 50% 76%, #0d1944, #03050f 68%);
+}
+
+.hero-reveal-effects,
+.hero-reveal-entry {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-reveal-effects {
+  z-index: -1;
+}
+
+.hero-reveal-entry {
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero-reveal-phone {
+  position: relative;
+  width: min(72vw, 35dvh, 330px);
+  transform-origin: 50% 25%;
+}
+
+.hero-reveal-phone-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1179 / 2556;
+}
+
+.hero-reveal-phone-text {
+  position: absolute;
+  inset: 29% 10% 47%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 24%, #071120, #03060e 77%);
+  box-shadow: 0 0 12px 8px #03060e;
+  color: #f0f7ff;
+  font: clamp(10px, 3.7vw, 20px) / 1.5 Pixel, monospace;
+  text-shadow: 0 0 11px #607affb0;
+}
+
+.hero-reveal-phone-text::after {
+  content: '';
+  width: 74%;
+  height: 3px;
+  margin: 12px auto 0;
+  background: repeating-linear-gradient(90deg, #537bff 0 5px, transparent 5px 9px);
+}
+
+.hero-reveal-logo {
+  display: block;
+  width: min(73%, 36dvh, 340px);
+  aspect-ratio: 432 / 146;
+  margin: 0 auto 6px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 12px #4571d980);
+}
+
+.hero-reveal-badge {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+  margin: 0 auto -1px;
+  padding: 5px 13px 6px;
+  border: 1px solid #b8d9ff;
+  background: linear-gradient(#395ad3, #172958);
+  color: #f5f9ff;
+  font: clamp(8px, 2vw, 11px) / 1 Pixel, monospace;
+}
+
+.hero-reveal-art {
+  position: relative;
+  width: min(96%, 438px, max(90px, calc((100dvh - 215px) * .7142857)));
+  aspect-ratio: 1060 / 1484;
+  margin: 0 auto;
+  outline: 1px solid #b3d8ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #263d8a, 0 0 0 4px #2e448c, 0 0 20px #244ccb88;
+  transform-origin: center;
+}
+
+.hero-reveal-art::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background:
+    linear-gradient(#e8f3ff, #e8f3ff) left top / 12px 2px,
+    linear-gradient(#e8f3ff, #e8f3ff) left top / 2px 12px,
+    linear-gradient(#e8f3ff, #e8f3ff) right top / 12px 2px,
+    linear-gradient(#e8f3ff, #e8f3ff) right top / 2px 12px,
+    linear-gradient(#e8f3ff, #e8f3ff) left bottom / 12px 2px,
+    linear-gradient(#e8f3ff, #e8f3ff) left bottom / 2px 12px,
+    linear-gradient(#e8f3ff, #e8f3ff) right bottom / 12px 2px,
+    linear-gradient(#e8f3ff, #e8f3ff) right bottom / 2px 12px;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+#hero-card-dialog .hero-reveal-art > #card-canvas,
+#hero-card-dialog .hero-reveal-art > #card-back-face {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+.hero-card-reveal .hero-card-actions {
+  margin-top: 14px;
+}
+
+.hero-card-reveal .hero-card-actions button {
+  min-height: 40px;
+  background: #101c49;
+}
+
+.hero-card-reveal .hero-card-actions #save-hero-card {
+  background: #2747b6;
+  border-color: #a2b8fb;
+}
+
+.hero-reveal-skip {
+  position: fixed;
+  z-index: 3;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  min-height: 40px;
+  padding: 7px 10px;
+  border: 1px solid #536caa;
+  background: #070f23;
+  color: #d3e3ff;
+  font: 13px Cubic, monospace;
+}
+
+#hero-card-dialog[open][data-reveal='playing'] .hero-reveal-entry {
+  animation: hero-entry-fade 3.4s linear both;
+}
+
+#hero-card-dialog[open][data-reveal='playing'] .hero-reveal-phone {
+  animation: hero-enter-crt 3.4s cubic-bezier(.4, 0, .55, 1) both;
+}
+
+#hero-card-dialog[open][data-reveal='playing'] .hero-reveal-logo {
+  animation: hero-logo-rise 3.4s ease-out both;
+}
+
+#hero-card-dialog[open][data-reveal='playing'] .hero-reveal-art {
+  animation: hero-card-arrival 3.4s ease-out both;
+}
+
+#hero-card-dialog[open][data-reveal='playing'] .hero-reveal-badge,
+#hero-card-dialog[open][data-reveal='playing'] .hero-card-actions,
+#hero-card-dialog[open][data-reveal='playing'] #card-warning {
+  animation: hero-card-actions 3.4s ease-out both;
+}
+
+@keyframes hero-entry-fade {
+  0%, 17% { opacity: 1; }
+  26%, 100% { opacity: 0; }
+}
+
+@keyframes hero-enter-crt {
+  0% { transform: scale(.99) translateY(0); }
+  21% { transform: scale(4.4) translateY(4%); }
+  100% { transform: scale(4.6) translateY(4%); }
+}
+
+@keyframes hero-logo-rise {
+  0%, 29% { opacity: 0; transform: translateY(21dvh) scale(.64); }
+  45% { opacity: 1; transform: translateY(16dvh) scale(1.04); }
+  60% { opacity: 1; transform: translateY(15dvh) scale(.98); }
+  79%, 100% { opacity: 1; transform: none; }
+}
+
+@keyframes hero-card-arrival {
+  0%, 58% { opacity: 0; transform: perspective(800px) translateY(35dvh) scale(.09) rotate(-15deg) rotateY(49deg); }
+  64% { opacity: 1; transform: perspective(800px) translateY(29dvh) scale(.16) rotate(-13deg) rotateY(38deg); }
+  82% { opacity: 1; transform: perspective(800px) translateY(-1.7dvh) scale(1.03) rotate(-4deg) rotateY(-10deg); }
+  91% { opacity: 1; transform: perspective(800px) scale(.994) rotate(.8deg) rotateY(2deg); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes hero-card-actions {
+  0%, 84% { opacity: 0; visibility: hidden; transform: translateY(5px); }
+  85% { visibility: visible; }
+  100% { opacity: 1; visibility: visible; transform: none; }
+}
