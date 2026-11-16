@@ -123,6 +123,20 @@
     }
   });
 
+  // iPhone Safari 無法自己全螢幕，引導玩家「加入主畫面」才能吃到 manifest 的 fullscreen
+  const a2hsBanner = document.getElementById('a2hs-banner');
+  const a2hsDismiss = document.getElementById('a2hs-dismiss');
+  if (a2hsBanner && a2hsDismiss) {
+    const dismissKey = 'zuperman-a2hs-dismissed';
+    const shouldShow = () => isIPhone && !isStandalone() && !localStorage.getItem(dismissKey);
+    a2hsBanner.hidden = !shouldShow();
+    a2hsDismiss.addEventListener('click', () => {
+      localStorage.setItem(dismissKey, '1');
+      a2hsBanner.hidden = true;
+    });
+    standalone.addEventListener('change', () => { a2hsBanner.hidden = !shouldShow(); });
+  }
+
   document.addEventListener('fullscreenchange', syncDisplay);
   document.addEventListener('webkitfullscreenchange', () => {
     manualWebkitRequest = false;

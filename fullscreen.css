@@ -63,6 +63,39 @@ html:is([data-display='fullscreen'], [data-display='standalone']) .toolbar {
   padding-top: calc(4px + env(safe-area-inset-top, 0px));
 }
 
+#a2hs-banner {
+  position: absolute;
+  left: 50%;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: min(320px, calc(100% - 32px));
+  padding: 12px 14px;
+  border: 1px solid #5673a8;
+  border-radius: 8px;
+  background: #0b1222e6;
+  box-shadow: 0 10px 35px #000a;
+  color: #e5edff;
+  z-index: 20;
+  text-align: center;
+}
+
+#a2hs-banner p {
+  margin: 0 0 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #cbd9f5;
+}
+
+#a2hs-banner button {
+  min-height: 34px;
+  padding: 4px 16px;
+  border: 1px solid #5e80d2;
+  border-radius: 4px;
+  background: #203b75;
+  color: #f4f7ff;
+  touch-action: manipulation;
+}
+
 #fullscreen-help {
   width: min(390px, calc(100% - 32px));
   max-height: calc(100dvh - 32px);
