@@ -221,3 +221,54 @@ html body:not([data-phase='title']) #quiz-page .actions #back {
 html body:not([data-phase='title']) #main {
   background: #1b1c1e;
 }
+
+/* v4（11/16）：整個遊戲不留黑色。
+   1) 頁面底色換成從電話亭裁出來的金屬面，電話亭兩側／下方露出來的都是金屬。
+   2) 電話亭原圖最下面 6% 是深色，蓋一塊同樣的金屬。 */
+html,
+body,
+html body #main,
+html body:not([data-phase='title']) #main {
+  background: #524f4b url('assets/ui/metal-wall.jpg') center / cover no-repeat;
+}
+
+html { background-attachment: fixed; }
+body, html body #main, html body:not([data-phase='title']) #main { background: transparent; }
+
+#phone-holder::after,
+#title-page::after,
+#ending-stage::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 93.6%;
+  bottom: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: #524f4b url('assets/ui/metal-wall.jpg') center 80% / cover no-repeat;
+  box-shadow: inset 0 3px 5px -2px #000b, inset 0 -1px 0 #ffffff14;
+}
+
+body.screen-zoom #phone-holder::after { content: none; }
+
+#phone-holder,
+#title-page,
+#ending-stage {
+  box-shadow: 0 0 22px 4px #0009;
+}
+
+.toolbar {
+  background: #2b2a28e6;
+  border-bottom-color: #6d675f;
+  color: #e6e1d8;
+}
+
+.actions { background: transparent; }
+
+#analysis-page {
+  border: 2px solid #8a8378;
+  border-radius: 18px;
+  background: #0b1030;
+  box-shadow: inset 0 0 40px #000a, 0 0 22px 4px #0009;
+}

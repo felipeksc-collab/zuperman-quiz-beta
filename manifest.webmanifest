@@ -6,8 +6,8 @@
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
-  "background_color": "#070a11",
-  "theme_color": "#070a11",
+  "background_color": "#524f4b",
+  "theme_color": "#524f4b",
   "icons": [
     {
       "src": "assets/ui/zuperman-app-192.png",
