@@ -335,3 +335,6 @@ html body[data-phase='title'] .toolbar :is(#fullscreen-toggle, .more-controls su
   font-size: 11px;
   white-space: nowrap;
 }
+
+/* v6：開場動畫播放時不顯示「加入主畫面」提示（會蓋住畫面） */
+#title-page:has(.zi-intro) #a2hs-banner { display: none; }

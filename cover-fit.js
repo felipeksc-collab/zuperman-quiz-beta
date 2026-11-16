@@ -4,7 +4,7 @@
    螢幕比較矮（Safari／Telegram 內開）時橫向最多拉寬 15%，其餘才露出金屬牆。 */
 (() => {
   const VISIBLE = 0.94;
-  const MAX_STRETCH = 1.15;
+  const TOP_CROP = 0.022;
   const ids = ['title-page', 'phone-holder', 'ending-stage'];
   let queued = false;
   let observer;
@@ -28,12 +28,23 @@
       const r = el.getBoundingClientRect();
       if (!r.width || !r.height) continue;
       let sx = W / r.width;
-      let sy = H / (r.height * VISIBLE);
-      const cap = W <= 600 ? MAX_STRETCH : 1;
-      if (sy >= sx) sy = sx;                    // 螢幕夠高：等比例貼滿左右
-      else if (sx > sy * cap) sx = sy * cap;    // 螢幕矮：貼滿上下，橫向微拉
-      const tx = (W - r.width * sx) / 2 - r.left;
-      const ty = -r.top;
+      let sy, tx, ty;
+      if (id === 'title-page' && el.querySelector('.zi-intro')) {
+        // 開場動畫：等比例放大蓋滿整個畫面，上下多的裁掉（天空與地面倒影）
+        sx = sy = Math.max(W / r.width, H / r.height);
+        tx = (W - r.width * sx) / 2 - r.left;
+        ty = (H - r.height * sy) / 2 - r.top;
+      } else {
+        sy = H / (r.height * (VISIBLE - TOP_CROP));
+        if (sy >= sx) {                         // 螢幕夠高：等比例貼滿左右
+          sy = sx;
+          ty = -r.top;
+        } else {                                // 螢幕矮：上緣鉚釘邊框裁掉一點，左右一律貼滿
+          if (W > 600) sx = sy;
+          ty = -r.top - r.height * TOP_CROP * sy;
+        }
+        tx = (W - r.width * sx) / 2 - r.left;
+      }
       el.style.transformOrigin = '0 0';
       el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px) scale(${sx.toFixed(5)},${sy.toFixed(5)})`;
     }
@@ -53,6 +64,8 @@
       const el = document.getElementById(id);
       if (el) observer.observe(el, { attributes: true, attributeFilter: ['hidden', 'style'] });
     }
+    const title = document.getElementById('title-page');
+    if (title) observer.observe(title, { childList: true });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-display', 'data-iphone-browser'] });
   }
 
