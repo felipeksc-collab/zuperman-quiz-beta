@@ -186,3 +186,38 @@ html:is([data-display='fullscreen'], [data-display='standalone']) .toolbar {
     z-index: 19;
   }
 }
+
+/* v3（11/16）：遊戲中真的滿版。
+   1) 加到主畫面後，上面那條工具列雖然看不到但還佔 103px —— 這裡強制歸零。
+   2)「上一題」不再佔一整列，改成浮在左下角的小按鈕。 */
+html body:not([data-phase='title']):not(.show-toolbar) .toolbar {
+  height: 0;
+  min-height: 0;
+  max-height: 0;
+  padding: 0;
+}
+
+html body:not([data-phase='title']) #quiz-page .actions {
+  position: absolute;
+  top: auto;
+  left: max(6px, env(safe-area-inset-left, 0px));
+  bottom: max(6px, calc(env(safe-area-inset-bottom, 0px) - 24px));
+  transform: none;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  z-index: 21;
+}
+
+html body:not([data-phase='title']) #quiz-page .actions #back {
+  min-height: 30px;
+  padding: 4px 10px;
+  font-size: 11px;
+  background: #0b1222cc;
+}
+
+html body:not([data-phase='title']) #main {
+  background: #1b1c1e;
+}

@@ -63,7 +63,7 @@
    availableW=Math.max(9,main.clientWidth-parseFloat(mainStyle.paddingLeft)-parseFloat(mainStyle.paddingRight));
   }else{
    root.style.removeProperty('--iphone-viewport-height');
-   const actions=state.phase==='quiz'?document.querySelector('.actions').getBoundingClientRect().height:48;
+   const actionsEl=document.querySelector('.actions');const actions=state.phase==='quiz'?(getComputedStyle(actionsEl).position==='absolute'?0:actionsEl.getBoundingClientRect().height):document.body.dataset.phase==='title'?48:0;
    availableH=Math.max(250,innerHeight-toolbar-actions);
    availableW=innerWidth;
   }
